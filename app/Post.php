@@ -18,4 +18,15 @@ class Post extends Model
     public function author(){
         return $this->belongsTo('\App\User','author_id');
     }
+
+    //? Verificar si este modelo author viene con los diferentes posts 
+    public function isAuthorLoaded(){
+        return $this->relationLoaded('author');
+    }
+    //? Verificar si este modelo comment viene con los diferentes posts 
+
+    public function isCommentsLoaded(){
+        return $this->relationLoaded('comments');
+    }
+
 }

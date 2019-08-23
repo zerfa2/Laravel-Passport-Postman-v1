@@ -22,7 +22,22 @@ Route::group([
     "namespace" => "Api\V1", 
     "middleware" =>["auth:api"]
 ],function(){
-    Route::apiResource('posts','PostController');
+    Route::apiResources([
+        'posts'=>'PostController',
+        'users'=>'UserController',
+        'comments' =>'CommentController'
+
+    ]);
+    // Route::apiResource('posts','PostController');
+
+
+    //! Se crea un controller para el relationships
+    Route::get('/posts/{post}/relationships/author','PostRelationShipController@author')->name('post.relationships.author');
+    Route::get('/posts/{post}/author','PostRelationShipController@author')->name('post.author');
+
+    Route::get('/posts/{post}/relationships/comments','PostRelationShipController@comments')->name('post.relationships.comments');
+    Route::get('/posts/{post}/comments','PostRelationShipController@comments')->name('post.comments');
+
 });
 
 Route::post('login', 'Api\AuthController@login');

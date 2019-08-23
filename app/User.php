@@ -32,6 +32,10 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany('\App\Post','author_id');
     }
+
+    public function isAdmin(){
+        return $this->admin;
+    }
     /**
      * The attributes that should be cast to native types.
      *
